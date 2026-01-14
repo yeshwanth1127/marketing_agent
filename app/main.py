@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
-from app.routers import agent, campaigns, metrics
+from app.routers import agent, campaigns, metrics, ingestion
 
 # Create FastAPI app
 app = FastAPI(
@@ -25,6 +25,7 @@ app.add_middleware(
 app.include_router(agent.router, prefix="/api/agent", tags=["agent"])
 app.include_router(campaigns.router, prefix="/api/campaigns", tags=["campaigns"])
 app.include_router(metrics.router, prefix="/api/metrics", tags=["metrics"])
+app.include_router(ingestion.router, prefix="/api/ingestion", tags=["ingestion"])
 
 
 @app.get("/")
@@ -41,6 +42,8 @@ async def root():
 async def health():
     """Health check endpoint."""
     return {"status": "healthy"}
+
+
 
 
 

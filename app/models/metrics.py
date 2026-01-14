@@ -1,6 +1,6 @@
 """Metrics models for daily and weekly aggregated data."""
 
-from sqlalchemy import Column, String, Integer, Date, DateTime, Numeric, ForeignKey, UniqueConstraint
+from sqlalchemy import Column, String, Integer, BigInteger, Date, DateTime, Numeric, ForeignKey, UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
@@ -17,7 +17,7 @@ class DailyMetric(Base):
     date = Column(Date, nullable=False, index=True)
     campaign_id = Column(UUID(as_uuid=True), ForeignKey("campaigns.id"), nullable=False, index=True)
     source = Column(String(50), nullable=False, index=True)
-    impressions = Column(Integer, default=0)
+    impressions = Column(BigInteger, default=0)
     clicks = Column(Integer, default=0)
     spend = Column(Numeric(12, 2), default=0)
     conversions = Column(Integer, default=0)
